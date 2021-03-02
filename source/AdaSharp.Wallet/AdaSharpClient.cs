@@ -35,6 +35,25 @@ namespace AdaSharp
             return new GetClockResponse(responseFromNode);
         }
 
+        public GetNetworkInfoResponse GetNetworkInfo()
+        {
+            return GetNetworkInfo(new GetNetworkInfoRequest());
+        }
+
+        public GetNetworkInfoResponse GetNetworkInfo(GetNetworkInfoRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var responseFromNode = Send(request);
+
+            // TODO: Error inspection.
+
+            return new GetNetworkInfoResponse(responseFromNode);
+        }
+
         private IRestResponse Send(CardanoNodeRequest request)
         {
             request.Validate();
@@ -59,6 +78,8 @@ namespace AdaSharp
             var client = _restClientFactory.Build();
 
             client.BaseUrl = CardanoNode.ToUri();
+
+            // TODO: StringToEnumConverter here.
 
             return client;
         }

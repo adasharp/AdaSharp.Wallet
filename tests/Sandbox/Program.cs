@@ -12,7 +12,7 @@ namespace Sandbox
 
             var client = new AdaSharpClient(node);
 
-            var response = client.GetClock(new GetClockRequest());
+            var response = client.GetNetworkInfo(new GetNetworkInfoRequest());
         }
     }
 }
