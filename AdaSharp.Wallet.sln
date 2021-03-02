@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaSharp.Wallet", "source\AdaSharp.Wallet\AdaSharp.Wallet.csproj", "{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{A14F3AA5-71C1-49C3-B608-580630A45692}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A5E62F89-FD56-4BB5-841B-8ADFD9BA320C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "tests\Sandbox\Sandbox.csproj", "{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07AAB94C-4E59-4B1B-9C07-B4AD4E90C2E0} = {A14F3AA5-71C1-49C3-B608-580630A45692}
+		{3E1905E6-F2D1-45EC-A78F-D67246AADAC4} = {A5E62F89-FD56-4BB5-841B-8ADFD9BA320C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CA69887-3951-494F-AC88-C212FEC5232B}
+	EndGlobalSection
+EndGlobal
