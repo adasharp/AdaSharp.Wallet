@@ -36,7 +36,7 @@ namespace AdaSharp.Network
 
             var responseFromNode = Send(request);
 
-            // TODO: Error inspection.
+            ValidateOkWasReturned(responseFromNode);
 
             return new GetClockResponse(responseFromNode);
         }

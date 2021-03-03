@@ -1,8 +1,7 @@
 ﻿using System.Net;
 using AdaSharp.Network;
-using AdaSharp.Tests.TestData;
+using AdaSharp.Tests.TestData.Node.Network.Clock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using RestSharp;
 
 namespace AdaSharp.Tests.Network
@@ -10,18 +9,14 @@ namespace AdaSharp.Tests.Network
     [TestClass]
     public class GetClockResponseTest
     {
-        private const string Http200TestFile = @"TestData\Node\Network\Clock\Http200.json";
-
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()
         {
             // Assemble
             const HttpStatusCode expectedHttpStatusCode = HttpStatusCode.OK;
 
-            var responseFromNode = TestRestResponse.LoadHttp200From(Http200TestFile);
-
             // Act
-            var result = ConstructGetClockResponse(responseFromNode);
+            var result = ConstructGetClockResponse(TestClockResponse.Http200);
 
             // Assert
             Assert.AreEqual(expectedHttpStatusCode, result.HttpStatusCode);
@@ -33,10 +28,8 @@ namespace AdaSharp.Tests.Network
             // Assemble
             const ClockStatus expectedClockStatus = ClockStatus.Available;
 
-            var responseFromNode = TestRestResponse.LoadHttp200From(Http200TestFile);
-
             // Act
-            var result = ConstructGetClockResponse(responseFromNode);
+            var result = ConstructGetClockResponse(TestClockResponse.Http200);
 
             // Assert
             Assert.AreEqual(expectedClockStatus, result.Status);
@@ -48,10 +41,9 @@ namespace AdaSharp.Tests.Network
             // Assemble
             var expectedUnitInResponse = "microsecond";
             var expectedQuantityInResponse = -4335;
-            var responseFromNode = TestRestResponse.LoadHttp200From(Http200TestFile);
-
+            
             // Act
-            var response = ConstructGetClockResponse(responseFromNode);
+            var response = ConstructGetClockResponse(TestClockResponse.Http200);
 
             // Assert
             var result = response.Offset;
@@ -60,9 +52,9 @@ namespace AdaSharp.Tests.Network
             Assert.AreEqual(expectedUnitInResponse, result.Unit);
         }
 
-        private GetClockResponse ConstructGetClockResponse(Mock<IRestResponse> mockedResponse)
+        private GetClockResponse ConstructGetClockResponse(IRestResponse responseFromNode)
         {
-            return new GetClockResponse(mockedResponse?.Object);
+            return new GetClockResponse(responseFromNode);
         }
     }
 }

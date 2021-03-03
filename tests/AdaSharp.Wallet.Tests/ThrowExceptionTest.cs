@@ -1,20 +1,49 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdaSharp.Tests
 {
-    public abstract class TestBase
+    /// <summary>
+    /// Used to verify that the correct exception is thrown when the system-under-test is invoked.
+    /// </summary>
+    /// <remarks>
+    /// This class was created to help keep the code in the unit test project somewhat cleaner. Originally, the
+    /// code in the test cases were starting to get a bit messy, a little bit harder to read. I opted to explore
+    /// other options to help accomplish the goal of keeping the code readable.
+    /// </remarks>
+    // TODO: Revisit if this is still a good idea. In my head it was a good idea, but as it was put into use,
+    // the code got larger.
+    public class ThrowExceptionTest
     {
-        protected void TestExpectedExceptionIsThrownOn(Action action, Exception expectedExceptionToBeThrown)
+        private Exception _expectedException;
+
+        public ThrowExceptionTest(Exception expectedExceptionToBeThrown)
+        {
+            ExpectedExceptionToBeThrown = expectedExceptionToBeThrown;
+        }
+
+        public Exception ExpectedExceptionToBeThrown
+        {
+            get => _expectedException;
+            set
+            {
+                if (value == null)
+                {
+                    var message = $"The \"{nameof(ExpectedExceptionToBeThrown)}\" property cannot be null.";
+
+                    throw new ArgumentNullException(nameof(value), message);
+                }
+
+                _expectedException = value;
+            }
+        }
+
+        public void AssertExceptionIsThrownOn(Action action)
         {
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
-            }
-
-            if (expectedExceptionToBeThrown == null)
-            {
-                throw new ArgumentNullException(nameof(expectedExceptionToBeThrown));
             }
 
             var exceptionWasNotThrown = false;
@@ -27,7 +56,7 @@ namespace AdaSharp.Tests
             }
             catch (Exception actualEx)
             {
-                AssertAreEqual(expectedExceptionToBeThrown, actualEx);
+                AssertAreEqual(ExpectedExceptionToBeThrown, actualEx);
             }
 
             if (exceptionWasNotThrown == false)
@@ -35,27 +64,12 @@ namespace AdaSharp.Tests
                 return;
             }
 
-            var expectedExceptionType = expectedExceptionToBeThrown.GetType();
+            var expectedExceptionType = ExpectedExceptionToBeThrown.GetType();
 
             Assert.Fail($"The expected exception type \"{expectedExceptionType.Name}\" was not thrown.");
         }
 
-        protected void TestNoExceptionIsThrownOn(Action action)
-        {
-            try
-            {
-                // Act
-                action.Invoke();
-            }
-            catch (Exception ex)
-            {
-                var exType = ex.GetType();
-
-                Assert.Fail($"An instance of {exType.Name} was thrown.");
-            }
-        }
-
-        protected static void AssertAreEqual(Exception expected, Exception actual)
+        protected virtual void AssertAreEqual(Exception expected, Exception actual)
         {
             if (expected != null)
             {

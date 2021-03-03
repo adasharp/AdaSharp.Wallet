@@ -7,14 +7,21 @@ namespace AdaSharp.Tests.TestData
 {
     public class TestRestResponse
     {
-        public static Mock<IRestResponse> LoadHttp200From(string bodyContentFilePath)
+        public static IRestResponse LoadHttp200From(string bodyContentFilePath)
         {
             var bodyContent = File.ReadAllText(bodyContentFilePath);
 
             return MockRestResponse(HttpStatusCode.OK, bodyContent);
         }
 
-        private static Mock<IRestResponse> MockRestResponse(HttpStatusCode statusCode, string content)
+        public static IRestResponse LoadHttp406From(string bodyContentFilePath)
+        {
+            var bodyContent = File.ReadAllText(bodyContentFilePath);
+
+            return MockRestResponse(HttpStatusCode.NotAcceptable, bodyContent);
+        }
+
+        private static IRestResponse MockRestResponse(HttpStatusCode statusCode, string content)
         {
             var mockedResponse = new Mock<IRestResponse>();
 
@@ -26,7 +33,7 @@ namespace AdaSharp.Tests.TestData
                 .Setup(m => m.Content)
                 .Returns(content);
 
-            return mockedResponse;
+            return mockedResponse.Object;
         }
     }
 }
