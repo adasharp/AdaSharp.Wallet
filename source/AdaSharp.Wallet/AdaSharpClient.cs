@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Net;
 using AdaSharp.Network;
 using AdaSharp.Rest;
+using Newtonsoft.Json;
 using RestSharp;
+using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace AdaSharp
 {
-    public sealed class AdaSharpClient
+    public sealed class AdaSharpClient : IAdaSharpClient
     {
         private readonly IRestClientFactory _restClientFactory;
 
         public CardanoNodeEndpoint CardanoNode { get; }
+
+        public INetworkRestResource Network { get; }
 
         public AdaSharpClient(CardanoNodeEndpoint node)
             : this(node, InitializeRestClientFactory())
@@ -17,54 +22,19 @@ namespace AdaSharp
 
         internal AdaSharpClient(CardanoNodeEndpoint node, IRestClientFactory restClientFactory)
         {
-            CardanoNode = node ?? throw new ArgumentNullException(nameof(node));
             _restClientFactory = restClientFactory ?? throw new ArgumentNullException(nameof(restClientFactory));
+
+            Network = new NetworkRestResource(this);
+            CardanoNode = node ?? throw new ArgumentNullException(nameof(node));
         }
 
-        public GetClockResponse GetClock(GetClockRequest request)
+        public IRestResponse Send(IRestRequest restRequest)
         {
-            if (request == null)
+            if (restRequest == null)
             {
-                throw new ArgumentNullException(nameof(request));
+                throw new ArgumentNullException(nameof(restRequest));
             }
 
-            var responseFromNode = Send(request);
-
-            // TODO: Error inspection.
-
-            return new GetClockResponse(responseFromNode);
-        }
-
-        public GetNetworkInfoResponse GetNetworkInfo()
-        {
-            return GetNetworkInfo(new GetNetworkInfoRequest());
-        }
-
-        public GetNetworkInfoResponse GetNetworkInfo(GetNetworkInfoRequest request)
-        {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            var responseFromNode = Send(request);
-
-            // TODO: Error inspection.
-
-            return new GetNetworkInfoResponse(responseFromNode);
-        }
-
-        private IRestResponse Send(CardanoNodeRequest request)
-        {
-            request.Validate();
-
-            var requestInRestForm = request.ToRestRequest();
-
-            return Send(requestInRestForm);
-        }
-
-        private IRestResponse Send(IRestRequest restRequest)
-        {
             var client = InitializeConfiguredClient();
 
             return client.Execute(restRequest);
@@ -79,6 +49,10 @@ namespace AdaSharp
 
             client.BaseUrl = CardanoNode.ToUri();
 
+            client.Proxy = new WebProxy("localhost", 8888);
+
+            client.AddDefaultHeader("Accept", "Hi");
+
             // TODO: StringToEnumConverter here.
 
             return client;
@@ -88,5 +62,7 @@ namespace AdaSharp
         {
             return new RestClientFactory();
         }
+
+        
     }
 }

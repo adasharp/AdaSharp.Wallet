@@ -10,9 +10,9 @@ namespace Sandbox
         {
             var node = new CardanoNodeEndpoint("192.168.15.138", 8090);
 
-            var client = new AdaSharpClient(node);
+            IAdaSharpClient client = new AdaSharpClient(node);
 
-            var response = client.GetNetworkInfo(new GetNetworkInfoRequest());
+            var response = client.Network.GetNetworkInfo();
         }
     }
 }
