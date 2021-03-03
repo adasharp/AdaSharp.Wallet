@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestData\Node\Network\Clock\Http200-StatusIsUnavailable.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Node\Network\Clock\Http200-StatusIsPending.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\Node\Network\Clock\Http200.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

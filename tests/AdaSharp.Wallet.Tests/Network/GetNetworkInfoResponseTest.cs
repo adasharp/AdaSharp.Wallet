@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using AdaSharp.Network;
 using AdaSharp.Tests.TestData.Node.Network.Information;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,24 +24,52 @@ namespace AdaSharp.Tests.Network
         }
 
         [TestMethod]
-        public void Constructor_NodeReturnsHttp200AndNodeIsSynched_SyncProgressIsPopulated()
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsReady_ProgressIsNull()
+        {
+            // Act
+            var response = ConstructGetNetworkInfoResponse(TestInformation.Http200SyncStatusIsReady);
+
+            // Assert
+            var result = response.SyncProgress.Progress;
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsReady_StatusIsReady()
         {
             // Assemble
             const NetworkSyncStatus expectedSyncStatus = NetworkSyncStatus.Ready;
 
-            // Act
-            var response = ConstructGetNetworkInfoResponse(TestInformation.Http200);
-
-            // Assert
-            var result = response.SyncProgress;
-
-            Assert.IsNotNull(result);
-            Assert.IsNull(result.Progress);
-            Assert.AreEqual(expectedSyncStatus, result.Status);
-
-            // TODO: Do one when node is currently synching - verify Progress property
-            // is populated.
+            // Act & Assert
+            AssertNetworkSyncStatusIs(expectedSyncStatus, TestInformation.Http200SyncStatusIsReady);
         }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsSyncing_StatusIsSyncing()
+        {
+            throw new NotImplementedException("Need to find sample in production.");
+        }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsSyncing_ProgressIsPopulated()
+        {
+            throw new NotImplementedException("Need to find sample in production.");
+        }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsNotResponding_StatusIsNotResponding()
+        {
+            throw new NotImplementedException("Need to find sample in production.");
+        }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200AndSyncStatusIsNotResponding_ProgressIsNull()
+        {
+            throw new NotImplementedException("Need to find sample in production.");
+        }
+
+        // TODO: Verify eras are being deserialized correctly.
 
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_NodeEraIsPopulated()
@@ -82,9 +111,60 @@ namespace AdaSharp.Tests.Network
             Assert.AreEqual(expectedTimeInResponse, result.Time);
         }
 
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200_NetworkTipIsPopulated()
+        {
+            // Assemble
+            const string expectedTimeInResponse = "2021-03-03T05:40:28Z";
+            const int expectedEpochNumInResponse = 117;
+            const int expectedAbsoluteSlotNumInResponse = 20380812;
+            const int expectedSlotNumInResponse = 206412;
+
+            // Act
+            var response = ConstructGetNetworkInfoResponse(TestInformation.Http200);
+
+            // Assert
+            var result = response.NetworkTip;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedEpochNumInResponse, result.EpochNumber);
+            Assert.AreEqual(expectedAbsoluteSlotNumInResponse, result.AbsoluteSlotNumber);
+            Assert.AreEqual(expectedSlotNumInResponse, result.SlotNumber);
+            Assert.AreEqual(expectedTimeInResponse, result.Time);
+        }
+
+        [TestMethod]
+        public void Constructor_NodeReturnsHttp200_NextEpochIsPopulated()
+        {
+            // Assemble
+            const string expectedNextEpochStartTimeInResponse = "2021-03-05T20:20:16Z";
+            const int expectedNextEpochNumInResponse = 118;
+           
+            // Act
+            var response = ConstructGetNetworkInfoResponse(TestInformation.Http200);
+
+            // Assert
+            var result = response.NextEpoch;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedNextEpochStartTimeInResponse, result.StartTime);
+            Assert.AreEqual(expectedNextEpochNumInResponse, result.Number);
+        }
+
         private GetNetworkInfoResponse ConstructGetNetworkInfoResponse(IRestResponse responseFromNode)
         {
             return new GetNetworkInfoResponse(responseFromNode);
+        }
+
+        private void AssertNetworkSyncStatusIs(NetworkSyncStatus expectedStatus, IRestResponse responseFromNode)
+        {
+            // Act
+            var response = ConstructGetNetworkInfoResponse(responseFromNode);
+
+            // Assert
+            var result = response.SyncProgress.Status;
+
+            Assert.AreEqual(expectedStatus, result);
         }
     }
 }
