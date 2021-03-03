@@ -28,6 +28,9 @@
     <None Update="TestData\Node\Network\Clock\Http406.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\Node\Network\Information\Http200.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

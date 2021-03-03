@@ -48,6 +48,7 @@ namespace AdaSharp.Tests.Network
             // Assert
             var result = response.Offset;
 
+            Assert.IsNotNull(result);
             Assert.AreEqual(expectedQuantityInResponse, result.Quantity);
             Assert.AreEqual(expectedUnitInResponse, result.Unit);
         }

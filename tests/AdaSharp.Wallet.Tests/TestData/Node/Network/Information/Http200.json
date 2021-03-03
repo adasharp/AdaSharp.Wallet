@@ -1,0 +1,24 @@
+﻿{
+  "network_tip": {
+    "time": "2021-03-03T05:40:28Z",
+    "epoch_number": 117,
+    "absolute_slot_number": 20380812,
+    "slot_number": 206412
+  },
+  "node_era": "mary",
+  "node_tip": {
+    "height": {
+      "quantity": 2372014,
+      "unit": "block"
+    },
+    "time": "2021-03-03T05:40:16Z",
+    "epoch_number": 117,
+    "absolute_slot_number": 20380800,
+    "slot_number": 206400
+  },
+  "sync_progress": { "status": "ready" },
+  "next_epoch": {
+    "epoch_start_time": "2021-03-05T20:20:16Z",
+    "epoch_number": 118
+  }
+}
