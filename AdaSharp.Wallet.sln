@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A5E62F89
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "tests\Sandbox\Sandbox.csproj", "{3E1905E6-F2D1-45EC-A78F-D67246AADAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaSharp.Wallet.Tests", "source\Unit Tests\AdaSharp.Wallet.Tests.csproj", "{757C8B69-07B4-4858-AF81-61AD63D71545}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaSharp.Wallet.Tests", "tests\AdaSharp.Wallet.Tests\AdaSharp.Wallet.Tests.csproj", "{757C8B69-07B4-4858-AF81-61AD63D71545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

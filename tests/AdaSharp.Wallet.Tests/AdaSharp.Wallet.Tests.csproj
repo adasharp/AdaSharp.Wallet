@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdaSharp.Wallet\AdaSharp.Wallet.csproj" />
+    <ProjectReference Include="..\..\source\AdaSharp.Wallet\AdaSharp.Wallet.csproj" />
   </ItemGroup>
 
 </Project>
