@@ -8,11 +8,5 @@ namespace AdaSharp.Tests
 {
     [TestClass()]
     public class AdaSharpClientTests
-    {
-        [TestMethod()]
-        public void SendTest()
-        {
-            Assert.Fail();
-        }
-    }
+    { }
 }

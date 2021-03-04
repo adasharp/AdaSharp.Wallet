@@ -2,7 +2,7 @@
 
 namespace AdaSharp.Rest
 {
-    public sealed class RestClientFactory : IRestClientFactory
+    internal sealed class RestClientFactory : IRestClientFactory
     {
         public IRestClient Build()
         {

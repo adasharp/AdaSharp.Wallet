@@ -9,5 +9,17 @@ namespace AdaSharp
 
         [JsonProperty("unit")]
         public string Unit { get; set; }
+
+        public UnitOfMeasure() 
+        { }
+
+        /// <remarks>
+        /// Created specifically to make the unit test code easier to read.
+        /// </remarks>
+        internal UnitOfMeasure(int quantity, string unit)
+        {
+            Quantity = quantity;
+            Unit = unit;
+        }
     }
 }

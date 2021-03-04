@@ -6,6 +6,10 @@
 
         GetNetworkInfoResponse GetNetworkInfo(GetNetworkInfoRequest request);
 
+        GetNetworkParametersResponse GetNetworkParameters();
+
+        GetNetworkParametersResponse GetNetworkParameters(GetNetworkParametersRequest request);
+
         GetClockResponse GetClock(GetClockRequest request);
     }
 }

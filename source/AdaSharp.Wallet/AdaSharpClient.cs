@@ -2,9 +2,7 @@
 using System.Net;
 using AdaSharp.Network;
 using AdaSharp.Rest;
-using Newtonsoft.Json;
 using RestSharp;
-using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace AdaSharp
 {
@@ -48,11 +46,7 @@ namespace AdaSharp
             var client = _restClientFactory.Build();
 
             client.BaseUrl = CardanoNode.ToUri();
-
-            client.Proxy = new WebProxy("localhost", 8888);
-
-            client.AddDefaultHeader("Accept", "Hi");
-
+            
             // TODO: StringToEnumConverter here.
 
             return client;

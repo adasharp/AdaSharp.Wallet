@@ -7,7 +7,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Network
 {
     [TestClass]
-    public class GetClockResponseTest
+    public class GetClockResponseTest : TestBase
     {
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()
@@ -56,8 +56,7 @@ namespace AdaSharp.Tests.Network
         public void Constructor_NodeReturnsHttp200AndStatusIsAvailable_OffsetIsPopulated()
         {
             // Assemble
-            var expectedUnitInResponse = "microsecond";
-            var expectedQuantityInResponse = -4335;
+            var expectedOffset = new UnitOfMeasure(-4335, "microsecond");
             
             // Act
             var response = ConstructGetClockResponse(TestClockResponse.Http200);
@@ -65,9 +64,7 @@ namespace AdaSharp.Tests.Network
             // Assert
             var result = response.Offset;
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedQuantityInResponse, result.Quantity);
-            Assert.AreEqual(expectedUnitInResponse, result.Unit);
+            AssertAreEqual(expectedOffset, result);
         }
 
         [TestMethod]

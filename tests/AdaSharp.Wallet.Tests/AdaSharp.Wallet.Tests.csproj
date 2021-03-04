@@ -22,6 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestData\Epoch-Allegra.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Epoch-Byron.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Epoch-Mary.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Epoch-Shelley.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\Node\Network\Clock\Http200-StatusIsUnavailable.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -35,6 +47,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="TestData\Node\Network\Information\Http200.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Node\Network\Parameters\Http200.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

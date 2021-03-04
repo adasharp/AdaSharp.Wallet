@@ -1,4 +1,5 @@
 ﻿using System;
+using AdaSharp.Network;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdaSharp.Tests
@@ -90,6 +91,33 @@ namespace AdaSharp.Tests
             var inheritsArgumentException = exception.GetType().IsSubclassOf(typeof(ArgumentException));
 
             return isArgumentExceptionType || inheritsArgumentException;
+        }
+
+        // TODO: Refactor old tests.
+        protected static void AssertAreEqual(UnitOfMeasure expected, UnitOfMeasure actual)
+        {
+            if (expected == null)
+            {
+                Assert.IsNull(actual);
+                return;
+            }
+            
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected.Quantity, actual.Quantity);
+            Assert.AreEqual(expected.Unit, actual.Unit);
+        }
+
+        protected static void AssertAreEqual(Epoch expected, Epoch actual)
+        {
+            if (expected == null)
+            {
+                Assert.IsNull(actual);
+                return;
+            }
+
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected.Number, actual.Number);
+            Assert.AreEqual(expected.StartTime, actual.StartTime);
         }
     }
 }

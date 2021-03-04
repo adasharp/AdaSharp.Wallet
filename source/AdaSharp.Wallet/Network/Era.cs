@@ -6,13 +6,13 @@ namespace AdaSharp.Network
     public enum Era
     {
         NotInitialized = 0,
+        
+        [JsonProperty("byron")]
+        Byron = 1,
 
         [JsonProperty("allegra")]
-        Allegra = 1,
-
-        [JsonProperty("byron")]
-        Byron = 2,
-
+        Allegra = 2,
+        
         [JsonProperty("shelley")]
         Shelley = 3,
 
