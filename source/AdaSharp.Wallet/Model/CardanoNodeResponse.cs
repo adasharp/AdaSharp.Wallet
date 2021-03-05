@@ -33,10 +33,10 @@ namespace AdaSharp.Model
 
         protected void PopulateSelfWith(IRestResponse responseFromNode)
         {
-            JsonConvert.PopulateObject(responseFromNode.Content, this);
+            PopulateTo(this, responseFromNode);
         }
 
-        protected void Populate(object @object, IRestResponse responseFromNode)
+        protected void PopulateTo(object @object, IRestResponse responseFromNode)
         {
             JsonConvert.PopulateObject(responseFromNode.Content, @object);
         }

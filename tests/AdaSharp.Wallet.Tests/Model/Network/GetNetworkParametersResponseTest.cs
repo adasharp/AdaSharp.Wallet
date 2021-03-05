@@ -34,7 +34,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            Assert.AreEqual(expectedValueInResponse, response.GenesisBlockHash);
+            Assert.AreEqual(expectedValueInResponse, response.NetworkParameters.GenesisBlockHash);
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            Assert.AreEqual(expectedValueInResponse, response.BlockchainStartTime);
+            Assert.AreEqual(expectedValueInResponse, response.NetworkParameters.BlockchainStartTime);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.SlotLength;
+            var result = response.NetworkParameters.SlotLength;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -75,7 +75,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.EpochLength;
+            var result = response.NetworkParameters.EpochLength;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -90,7 +90,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.SecurityParameter;
+            var result = response.NetworkParameters.SecurityParameter;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -105,7 +105,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.ActiveSlotCoefficient;
+            var result = response.NetworkParameters.ActiveSlotCoefficient;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -120,7 +120,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.DecentralizationLevel;
+            var result = response.NetworkParameters.DecentralizationLevel;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -135,7 +135,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.DesiredPoolNumber;
+            var result = response.NetworkParameters.DesiredPoolNumber;
 
             Assert.AreEqual(expectedValueInResponse, result);
         }
@@ -150,7 +150,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.MinimumUtxoValue;
+            var result = response.NetworkParameters.MinimumUtxoValue;
 
             AssertAreEqual(expectedValueInResponse, result);
         }
@@ -171,7 +171,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
 
             // Assert
-            var result = response.Eras;
+            var result = response.NetworkParameters.Eras;
 
             AssertAreEqual(expectedEraEpochDictionaryInResponse, result);
         }

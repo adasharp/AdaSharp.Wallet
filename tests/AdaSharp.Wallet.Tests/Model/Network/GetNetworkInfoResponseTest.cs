@@ -30,7 +30,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200SyncStatusIsReady);
 
             // Assert
-            var result = response.SyncProgress.Progress;
+            var result = response.NetworkInfo.SyncProgress.Progress;
 
             Assert.IsNull(result);
         }
@@ -111,7 +111,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200);
 
             // Assert
-            var result = response.NodeTip;
+            var result = response.NetworkInfo.NodeTip;
 
             Assert.IsNotNull(result);
             AssertAreEqual(expectedHeightInResponse, result.Height);
@@ -134,7 +134,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200);
 
             // Assert
-            var result = response.NetworkTip;
+            var result = response.NetworkInfo.NetworkTip;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedEpochNumInResponse, result.EpochNumber);
@@ -153,7 +153,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200);
 
             // Assert
-            var result = response.NextEpoch;
+            var result = response.NetworkInfo.NextEpoch;
 
             AssertAreEqual(expectedNextEpoch, result);
         }
@@ -169,7 +169,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(responseFromNode);
 
             // Assert
-            var result = response.SyncProgress.Status;
+            var result = response.NetworkInfo.SyncProgress.Status;
 
             Assert.AreEqual(expectedStatus, result);
         }
@@ -180,7 +180,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetNetworkInfoResponse(responseFromNode);
 
             // Assert
-            var result = response.NodeEra;
+            var result = response.NetworkInfo.NodeEra;
 
             Assert.AreEqual(expectedEra, result);
         }

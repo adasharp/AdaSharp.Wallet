@@ -12,7 +12,7 @@ namespace AdaSharp.Model.Shelley.Wallets
         {
             Wallets = new List<Wallet>();
 
-            Populate(Wallets, responseFromNode);
+            PopulateTo(Wallets, responseFromNode);
         }
     }
 }

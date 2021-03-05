@@ -63,7 +63,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetClockResponse(TestClockResponse.Http200);
 
             // Assert
-            var result = response.Offset;
+            var result = response.Clock.Offset;
 
             AssertAreEqual(expectedOffset, result);
         }
@@ -75,7 +75,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetClockResponse(TestClockResponse.Http200StatusIsPending);
 
             // Assert
-            var result = response.Offset;
+            var result = response.Clock.Offset;
 
             Assert.IsNull(result);
         }
@@ -87,7 +87,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetClockResponse(TestClockResponse.Http200StatusIsUnavailable);
 
             // Assert
-            var result = response.Offset;
+            var result = response.Clock.Offset;
 
             Assert.IsNull(result);
         }
@@ -103,7 +103,7 @@ namespace AdaSharp.Tests.Model.Network
             var response = ConstructGetClockResponse(responseFromNode);
 
             // Assert
-            var result = response.Status;
+            var result = response.Clock.Status;
 
             Assert.AreEqual(expectedStatus, result);
         }

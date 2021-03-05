@@ -1,20 +1,17 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
+﻿using RestSharp;
 
 namespace AdaSharp.Model.Network
 {
     public class GetClockResponse : CardanoNodeResponse
     {
-        [JsonProperty("status")]
-        public ClockStatus Status { get; set; }
-
-        [JsonProperty("offset")]
-        public UnitOfMeasure Offset { get; set; }
+        public Clock Clock { get; set; }
 
         internal GetClockResponse(IRestResponse responseFromNode)
             : base(GetStatusCodeIn(responseFromNode))
         {
-            PopulateSelfWith(responseFromNode);
+            Clock = new Clock();
+
+            PopulateTo(Clock, responseFromNode);
         }
     }
 }
