@@ -2,7 +2,11 @@
 using System.Net;
 using AdaSharp.Network;
 using AdaSharp.Rest;
+using AdaSharp.Shelley;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using RestSharp;
+using RestSharp.Serializers.NewtonsoftJson;
 
 namespace AdaSharp
 {
@@ -13,6 +17,7 @@ namespace AdaSharp
         public CardanoNodeEndpoint CardanoNode { get; }
 
         public INetworkRestResource Network { get; }
+        public IShelleyRestResource Shelley { get; }
 
         public AdaSharpClient(CardanoNodeEndpoint node)
             : this(node, InitializeRestClientFactory())
@@ -23,6 +28,7 @@ namespace AdaSharp
             _restClientFactory = restClientFactory ?? throw new ArgumentNullException(nameof(restClientFactory));
 
             Network = new NetworkRestResource(this);
+            Shelley = new ShelleyRestResource(this);
             CardanoNode = node ?? throw new ArgumentNullException(nameof(node));
         }
 
@@ -47,6 +53,12 @@ namespace AdaSharp
 
             client.BaseUrl = CardanoNode.ToUri();
             
+
+            var jsonSettings = new JsonSerializerSettings();
+
+            jsonSettings.Converters.Add(new StringEnumConverter());
+
+            client.UseNewtonsoftJson(jsonSettings);
             // TODO: StringToEnumConverter here.
 
             return client;

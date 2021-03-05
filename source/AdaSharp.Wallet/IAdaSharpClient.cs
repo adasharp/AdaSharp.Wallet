@@ -1,4 +1,5 @@
 ﻿using AdaSharp.Network;
+using AdaSharp.Shelley;
 using RestSharp;
 
 namespace AdaSharp
@@ -7,6 +8,7 @@ namespace AdaSharp
     {
         CardanoNodeEndpoint CardanoNode { get; }
         INetworkRestResource Network { get; }
+        IShelleyRestResource Shelley { get; }
         IRestResponse Send(IRestRequest restRequest);
     }
 }

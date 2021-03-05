@@ -38,10 +38,10 @@ namespace AdaSharp.Tests.Network
         public void Constructor_NodeReturnsHttp200AndSyncStatusIsReady_StatusIsReady()
         {
             // Assemble
-            const NetworkSyncStatus expectedSyncStatus = NetworkSyncStatus.Ready;
+            const SyncStatus expectedSyncStatus = SyncStatus.Ready;
 
             // Act & Assert
-            AssertNetworkSyncStatusIs(expectedSyncStatus, TestInformationResponse.Http200SyncStatusIsReady);
+            AssertSyncStatusIs(expectedSyncStatus, TestInformationResponse.Http200SyncStatusIsReady);
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace AdaSharp.Tests.Network
             return new GetNetworkInfoResponse(responseFromNode);
         }
 
-        private void AssertNetworkSyncStatusIs(NetworkSyncStatus expectedStatus, IRestResponse responseFromNode)
+        private void AssertSyncStatusIs(SyncStatus expectedStatus, IRestResponse responseFromNode)
         {
             // Act
             var response = ConstructGetNetworkInfoResponse(responseFromNode);

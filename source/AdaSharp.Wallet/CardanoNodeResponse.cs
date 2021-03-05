@@ -35,5 +35,10 @@ namespace AdaSharp
         {
             JsonConvert.PopulateObject(responseFromNode.Content, this);
         }
+
+        protected void Populate(object @object, IRestResponse responseFromNode)
+        {
+            JsonConvert.PopulateObject(responseFromNode.Content, @object);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace AdaSharp.Network
 {
@@ -7,16 +7,16 @@ namespace AdaSharp.Network
     {
         NotInitialized = 0,
         
-        [JsonProperty("byron")]
+        [EnumMember(Value = "byron")]
         Byron = 1,
 
-        [JsonProperty("allegra")]
+        [EnumMember(Value = "allegra")]
         Allegra = 2,
         
-        [JsonProperty("shelley")]
+        [EnumMember(Value = "shelley")]
         Shelley = 3,
 
-        [JsonProperty("mary")]
+        [EnumMember(Value = "mary")]
         Mary = 4
     }
 }

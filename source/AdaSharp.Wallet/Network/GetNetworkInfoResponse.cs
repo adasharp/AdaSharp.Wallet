@@ -6,7 +6,7 @@ namespace AdaSharp.Network
     public class GetNetworkInfoResponse : CardanoNodeResponse
     {
         [JsonProperty("sync_progress")]
-        public NetworkSyncProgress SyncProgress { get; set; }
+        public SyncState SyncProgress { get; set; }
 
         [JsonProperty("node_tip")]
         public TipWithHeight NodeTip { get; set; }

@@ -21,5 +21,15 @@ namespace AdaSharp
             Quantity = quantity;
             Unit = unit;
         }
+
+        // TODO: Test.
+        public override string ToString()
+        {
+            var includeUnitInOutput = string.IsNullOrWhiteSpace(Unit) == false;
+
+            return includeUnitInOutput
+                ? $"{Quantity} {Unit}"
+                : $"{Quantity}";
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AdaSharp.Network
 {
-    public sealed class NetworkRestResource : RestResourceBase, INetworkRestResource
+    internal sealed class NetworkRestResource : RestResourceBase, INetworkRestResource
     {
         internal NetworkRestResource(IAdaSharpClient client)
             : base(client)

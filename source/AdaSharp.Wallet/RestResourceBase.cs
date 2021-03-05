@@ -5,6 +5,7 @@ using RestSharp;
 
 namespace AdaSharp
 {
+    // TODO: Should this belong in the "Rest" namespace?
     public abstract class RestResourceBase
     {
         private readonly IAdaSharpClient _client;

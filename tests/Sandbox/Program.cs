@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using AdaSharp;
 using AdaSharp.Network;
+using AdaSharp.Shelley.Wallets;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Sandbox
 {
@@ -12,7 +16,7 @@ namespace Sandbox
 
             IAdaSharpClient client = new AdaSharpClient(node);
 
-            var response = client.Network.GetNetworkInfo();
+            var response = client.Shelley.Wallets.GetAll();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace AdaSharp.Network
 {
@@ -6,13 +6,13 @@ namespace AdaSharp.Network
     {
         NotInitialized = 0,
 
-        [JsonProperty("available")]
+        [EnumMember(Value = "available")]
         Available = 1,
 
-        [JsonProperty("unavailable")]
+        [EnumMember(Value = "unavailable")]
         Unavailable = 2,
 
-        [JsonProperty("pending")]
+        [EnumMember(Value = "pending")]
         Pending = 3
     }
 }
