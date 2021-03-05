@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Byron\" />
+    <Folder Include="Model\Byron\" />
   </ItemGroup>
 
 </Project>

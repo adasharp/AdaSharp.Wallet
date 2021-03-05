@@ -1,4 +1,4 @@
-﻿using AdaSharp.Network;
+﻿using AdaSharp.Model;
 
 namespace AdaSharp.Tests.TestData
 {

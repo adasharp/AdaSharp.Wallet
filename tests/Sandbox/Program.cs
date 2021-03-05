@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AdaSharp;
-using AdaSharp.Network;
-using AdaSharp.Shelley.Wallets;
+using AdaSharp.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

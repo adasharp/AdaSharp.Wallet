@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Net;
-using AdaSharp.Network;
+using AdaSharp.Model;
+using AdaSharp.Model.Network;
+using AdaSharp.Model.Shelley;
 using AdaSharp.Rest;
-using AdaSharp.Shelley;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RestSharp;
@@ -23,7 +23,7 @@ namespace AdaSharp
             : this(node, InitializeRestClientFactory())
         { }
 
-        internal AdaSharpClient(CardanoNodeEndpoint node, IRestClientFactory restClientFactory)
+        public AdaSharpClient(CardanoNodeEndpoint node, IRestClientFactory restClientFactory)
         {
             _restClientFactory = restClientFactory ?? throw new ArgumentNullException(nameof(restClientFactory));
 

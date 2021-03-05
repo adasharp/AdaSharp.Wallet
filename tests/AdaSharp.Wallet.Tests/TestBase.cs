@@ -1,5 +1,5 @@
 ﻿using System;
-using AdaSharp.Network;
+using AdaSharp.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdaSharp.Tests

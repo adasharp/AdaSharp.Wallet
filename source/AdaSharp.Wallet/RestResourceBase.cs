@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using AdaSharp.Model;
 using Newtonsoft.Json;
 using RestSharp;
 

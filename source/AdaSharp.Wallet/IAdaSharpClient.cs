@@ -1,5 +1,6 @@
-﻿using AdaSharp.Network;
-using AdaSharp.Shelley;
+﻿using AdaSharp.Model;
+using AdaSharp.Model.Network;
+using AdaSharp.Model.Shelley;
 using RestSharp;
 
 namespace AdaSharp
