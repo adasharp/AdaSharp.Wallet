@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using AdaSharp.Model;
 using AdaSharp.Model.Network;
+using AdaSharp.Tests.Extensions;
 using AdaSharp.Tests.TestData;
 using AdaSharp.Tests.TestData.Node.Network.Parameters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,7 +63,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.SlotLength;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -77,7 +78,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.EpochLength;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -92,7 +93,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.SecurityParameter;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -107,7 +108,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.ActiveSlotCoefficient;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -122,7 +123,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.DecentralizationLevel;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -152,7 +153,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkParameters.MinimumUtxoValue;
 
-            AssertAreEqual(expectedValueInResponse, result);
+            Assert.That.AreEqual(expectedValueInResponse, result);
         }
 
         [TestMethod]
@@ -202,7 +203,7 @@ namespace AdaSharp.Tests.Model.Network
 
                 var actualEpoch = actual[expectedEra];
 
-                AssertAreEqual(expectedEpoch, actualEpoch);
+                Assert.That.AreEqual(expectedEpoch, actualEpoch);
             }
         }
     }

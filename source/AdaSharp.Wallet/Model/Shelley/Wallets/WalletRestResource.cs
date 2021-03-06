@@ -30,7 +30,8 @@ namespace AdaSharp.Model.Shelley.Wallets
 
             var responseFromNode = Send(request);
 
-            // TODO: validate
+            ValidateOkWasReturned(responseFromNode);
+            
             return new ListWalletResponse(responseFromNode);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using AdaSharp.Model;
 using AdaSharp.Model.Network;
+using AdaSharp.Tests.Extensions;
 using AdaSharp.Tests.TestData.Node.Network.Clock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
@@ -65,7 +66,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.Clock.Offset;
 
-            AssertAreEqual(expectedOffset, result);
+            Assert.That.AreEqual(expectedOffset, result);
         }
 
         [TestMethod]

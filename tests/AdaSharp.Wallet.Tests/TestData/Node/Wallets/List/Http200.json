@@ -19,28 +19,22 @@
     },
     "name": "Test",
     "delegation": {
-      "next": [
-        {
-          "status": "delegating",
-          "changes_at": {
-            "epoch_start_time": "2021-03-05T20:20:16Z",
-            "epoch_number": 118
-          },
-          "target": "pool1e9a7zgmcpnm9tlfwv6rsalnfqgzrr644teu7m37mfh8hvwnspuf"
-        }
-      ],
-      "active": { "status": "not_delegating" }
+      "next": [],
+      "active": {
+        "status": "delegating",
+        "target": "pool1e9a7zgmcpnm9tlfwv6rsalnfqgzrr644teu7m37mfh8hvwnspuf"
+      }
     },
     "id": "6b134a8fb58167ad735993bed834c779f06f340f",
     "tip": {
       "height": {
-        "quantity": 2377999,
+        "quantity": 2380750,
         "unit": "block"
       },
-      "time": "2021-03-05T05:42:59Z",
-      "epoch_number": 117,
-      "absolute_slot_number": 20553763,
-      "slot_number": 379363
+      "time": "2021-03-06T04:21:07Z",
+      "epoch_number": 118,
+      "absolute_slot_number": 20635251,
+      "slot_number": 28851
     },
     "assets": {
       "total": [],

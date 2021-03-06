@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using AdaSharp.Model;
 using AdaSharp.Model.Network;
+using AdaSharp.Tests.Extensions;
 using AdaSharp.Tests.TestData.Node.Network.Information;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
@@ -114,7 +115,7 @@ namespace AdaSharp.Tests.Model.Network
             var result = response.NetworkInfo.NodeTip;
 
             Assert.IsNotNull(result);
-            AssertAreEqual(expectedHeightInResponse, result.Height);
+            Assert.That.AreEqual(expectedHeightInResponse, result.Height);
             Assert.AreEqual(expectedEpochNumInResponse, result.EpochNumber);
             Assert.AreEqual(expectedAbsoluteSlotNumInResponse, result.AbsoluteSlotNumber);
             Assert.AreEqual(expectedSlotNumInResponse, result.SlotNumber);
@@ -155,7 +156,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkInfo.NextEpoch;
 
-            AssertAreEqual(expectedNextEpoch, result);
+            Assert.That.AreEqual(expectedNextEpoch, result);
         }
 
         private GetNetworkInfoResponse ConstructGetNetworkInfoResponse(IRestResponse responseFromNode)

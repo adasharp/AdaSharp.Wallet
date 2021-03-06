@@ -10,5 +10,8 @@ namespace AdaSharp.Tests.TestData.Node.Network.Information
         public static IRestResponse Http200SyncStatusIsReady => Http200;
 
         public static IRestResponse Http200EraIsMary => Http200;
+
+        public static IRestResponse Http406 =>
+            TestRestResponse.LoadHttp406From(@"TestData\Node\Network\Information\Http406.json");
     }
 }
