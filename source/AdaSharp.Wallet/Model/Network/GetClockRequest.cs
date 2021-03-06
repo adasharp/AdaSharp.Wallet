@@ -8,6 +8,8 @@ namespace AdaSharp.Model.Network
 
         internal override IRestRequest ToRestRequest()
         {
+            Validate();
+
             var restRequest = new RestRequest("/network/clock", Method.GET);
 
             if (ForceNtpCheck)
@@ -18,7 +20,7 @@ namespace AdaSharp.Model.Network
             return restRequest;
         }
 
-        internal override void Validate()
+        protected override void Validate()
         { }
     }
 }

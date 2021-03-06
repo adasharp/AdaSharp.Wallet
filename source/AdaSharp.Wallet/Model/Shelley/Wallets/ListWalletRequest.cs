@@ -6,10 +6,12 @@ namespace AdaSharp.Model.Shelley.Wallets
     {
         internal override IRestRequest ToRestRequest()
         {
+            Validate();
+
             return new RestRequest("/wallets", Method.GET);
         }
 
-        internal override void Validate()
+        protected override void Validate()
         { }
     }
 }

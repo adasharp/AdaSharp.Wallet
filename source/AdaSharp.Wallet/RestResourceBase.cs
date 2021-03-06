@@ -18,8 +18,6 @@ namespace AdaSharp
 
         protected IRestResponse Send(CardanoNodeRequest request)
         {
-            request.Validate();
-
             var requestInRestForm = request.ToRestRequest();
 
             return _client.Send(requestInRestForm);

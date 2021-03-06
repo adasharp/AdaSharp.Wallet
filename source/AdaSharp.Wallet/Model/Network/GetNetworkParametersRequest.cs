@@ -6,10 +6,12 @@ namespace AdaSharp.Model.Network
     {
         internal override IRestRequest ToRestRequest()
         {
+            Validate();
+
             return new RestRequest("/network/parameters", Method.GET);
         }
 
-        internal override void Validate()
+        protected override void Validate()
         { }
     }
 }

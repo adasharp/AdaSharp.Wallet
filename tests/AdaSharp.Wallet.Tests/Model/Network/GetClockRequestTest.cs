@@ -84,13 +84,13 @@ namespace AdaSharp.Tests.Model.Network
         }
 
         [TestMethod]
-        public void Validate_AnyState_DoesNotThrowAnyExceptions()
+        public void ToRestRequest_AnyState_DoesNotThrowAnyExceptions()
         {
             // Assemble
             var request = new GetClockRequest();
 
             // Act & Assert
-            TestNoExceptionIsThrownOn(() => request.Validate());
+            TestNoExceptionIsThrownOn(() => request.ToRestRequest());
         }
     }
 }

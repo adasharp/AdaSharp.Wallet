@@ -17,6 +17,9 @@ namespace AdaSharp.Model.Shelley.Wallets
         
         internal override IRestRequest ToRestRequest()
         {
+            Validate();
+            
+
             var restRequest =  new RestRequest("/wallets", Method.POST);
 
             restRequest.AddJsonBody(this);
@@ -24,7 +27,7 @@ namespace AdaSharp.Model.Shelley.Wallets
             return restRequest;
         }
 
-        internal override void Validate()
+        protected override void Validate()
         {
             // TODo
         }

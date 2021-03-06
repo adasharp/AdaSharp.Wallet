@@ -58,6 +58,9 @@
     <None Update="TestData\Node\Network\Parameters\Http406.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\Node\Wallets\Get\Http200.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\Node\Wallets\List\Http200-NoWallets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

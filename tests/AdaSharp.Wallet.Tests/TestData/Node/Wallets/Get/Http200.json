@@ -1,0 +1,42 @@
+﻿{
+  "passphrase": { "last_updated_at": "2021-03-05T04:07:50.636736295Z" },
+  "address_pool_gap": 20,
+  "state": { "status": "ready" },
+  "balance": {
+    "reward": {
+      "quantity": 0,
+      "unit": "lovelace"
+    },
+    "total": {
+      "quantity": 997824863,
+      "unit": "lovelace"
+    },
+    "available": {
+      "quantity": 997824863,
+      "unit": "lovelace"
+    }
+  },
+  "name": "Test",
+  "delegation": {
+    "next": [],
+    "active": {
+      "status": "delegating",
+      "target": "pool1e9a7zgmcpnm9tlfwv6rsalnfqgzrr644teu7m37mfh8hvwnspuf"
+    }
+  },
+  "id": "6b134a8fb58167ad735993bed834c779f06f340f",
+  "tip": {
+    "height": {
+      "quantity": 2380750,
+      "unit": "block"
+    },
+    "time": "2021-03-06T04:21:07Z",
+    "epoch_number": 118,
+    "absolute_slot_number": 20635251,
+    "slot_number": 28851
+  },
+  "assets": {
+    "total": [],
+    "available": []
+  }
+}

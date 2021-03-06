@@ -6,7 +6,7 @@ namespace AdaSharp.Model
     {
         internal abstract IRestRequest ToRestRequest();
 
-        internal abstract void Validate();
+        protected abstract void Validate();
 
         protected string ToTrueFalse(bool value)
         {

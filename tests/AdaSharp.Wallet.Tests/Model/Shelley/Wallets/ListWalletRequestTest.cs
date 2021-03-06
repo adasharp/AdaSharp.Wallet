@@ -38,13 +38,13 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void Validate_AnyState_DoesNotThrowAnyExceptions()
+        public void ToRestRequest_AnyState_DoesNotThrowAnyExceptions()
         {
             // Assemble
             var request = new ListWalletRequest();
 
             // Act & Assert
-            TestNoExceptionIsThrownOn(() => request.Validate());
+            TestNoExceptionIsThrownOn(() => request.ToRestRequest());
         }
     }
 }
