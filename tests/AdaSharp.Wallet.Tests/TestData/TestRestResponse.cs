@@ -9,16 +9,29 @@ namespace AdaSharp.Tests.TestData
     {
         public static IRestResponse LoadHttp200From(string bodyContentFilePath)
         {
-            var bodyContent = File.ReadAllText(bodyContentFilePath);
-
-            return MockRestResponse(HttpStatusCode.OK, bodyContent);
+            return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.OK);
         }
 
         public static IRestResponse LoadHttp406From(string bodyContentFilePath)
         {
+            return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.NotAcceptable);
+        }
+
+        public static IRestResponse LoadHttp404From(string bodyContentFilePath)
+        {
+            return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.NotFound);
+        }
+
+        public static IRestResponse LoadHttp400From(string bodyContentFilePath)
+        {
+            return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.BadRequest);
+        }
+
+        private static IRestResponse LoadHttpResponseFrom(string bodyContentFilePath, HttpStatusCode statusCode)
+        {
             var bodyContent = File.ReadAllText(bodyContentFilePath);
 
-            return MockRestResponse(HttpStatusCode.NotAcceptable, bodyContent);
+            return MockRestResponse(statusCode, bodyContent);
         }
 
         private static IRestResponse MockRestResponse(HttpStatusCode statusCode, string content)

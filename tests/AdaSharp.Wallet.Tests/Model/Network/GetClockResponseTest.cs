@@ -9,7 +9,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Network
 {
     [TestClass]
-    public class GetClockResponseTest : TestBase
+    public class GetClockResponseTest : CardanoNodeResponseTestBase
     {
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()
@@ -58,7 +58,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200AndStatusIsAvailable_OffsetIsPopulated()
         {
             // Assemble
-            var expectedOffset = new UnitOfMeasure(-4335, "microsecond");
+            var expectedOffset = QuantityInMicroseconds(-4335);
             
             // Act
             var response = ConstructGetClockResponse(TestClockResponse.Http200);

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using AdaSharp.Model.Shelley.Wallets;
-using AdaSharp.Tests.Extensions;
+using AdaSharp.Tests.Extensions.Shelley;
 using AdaSharp.Tests.TestData;
 using AdaSharp.Tests.TestData.Node.Wallets.List;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

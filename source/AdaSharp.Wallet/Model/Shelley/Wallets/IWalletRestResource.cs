@@ -8,5 +8,7 @@
         ListWalletResponse GetAll(ListWalletRequest request);
 
         ListWalletResponse GetAll();
+
+        GetWalletResponse GetWallet(GetWalletRequest request);
     }
 }

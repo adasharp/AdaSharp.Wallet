@@ -9,7 +9,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Network
 {
     [TestClass]
-    public class GetNetworkInfoResponseTest : TestBase
+    public class GetNetworkInfoResponseTest : CardanoNodeResponseTestBase
     {
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()
@@ -102,11 +102,17 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_NodeTipIsPopulated()
         {
             // Assemble
-            var expectedHeightInResponse = new UnitOfMeasure(2372014, "block");
-            const string expectedTimeInResponse = "2021-03-03T05:40:16Z";
-            const int expectedEpochNumInResponse = 117;
-            const int expectedAbsoluteSlotNumInResponse = 20380800;
-            const int expectedSlotNumInResponse = 206400;
+            var expectedHeight = QuantityInBlocks(2372014);
+            const string expectedTime = "2021-03-03T05:40:16Z";
+            const int expectedEpochNumber = 117;
+            const int expectedAbsoluteSlotNumber = 20380800;
+            const int expectedSlotNumber = 206400;
+            var expectedTip = BuildTipWithHeight(
+                expectedAbsoluteSlotNumber,
+                expectedSlotNumber,
+                expectedEpochNumber,
+                expectedTime,
+                expectedHeight);
 
             // Act
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200);
@@ -114,22 +120,22 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkInfo.NodeTip;
 
-            Assert.IsNotNull(result);
-            Assert.That.AreEqual(expectedHeightInResponse, result.Height);
-            Assert.AreEqual(expectedEpochNumInResponse, result.EpochNumber);
-            Assert.AreEqual(expectedAbsoluteSlotNumInResponse, result.AbsoluteSlotNumber);
-            Assert.AreEqual(expectedSlotNumInResponse, result.SlotNumber);
-            Assert.AreEqual(expectedTimeInResponse, result.Time);
+            Assert.That.AreEqual(expectedTip, result);
         }
 
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_NetworkTipIsPopulated()
         {
             // Assemble
-            const string expectedTimeInResponse = "2021-03-03T05:40:28Z";
-            const int expectedEpochNumInResponse = 117;
-            const int expectedAbsoluteSlotNumInResponse = 20380812;
-            const int expectedSlotNumInResponse = 206412;
+            const string expectedTime = "2021-03-03T05:40:28Z";
+            const int expectedEpochNumber = 117;
+            const int expectedAbsoluteSlotNumber = 20380812;
+            const int expectedSlotNumber = 206412;
+            var expectedTip = BuildTip(
+                expectedAbsoluteSlotNumber,
+                expectedSlotNumber,
+                expectedEpochNumber,
+                expectedTime);
 
             // Act
             var response = ConstructGetNetworkInfoResponse(TestInformationResponse.Http200);
@@ -137,11 +143,7 @@ namespace AdaSharp.Tests.Model.Network
             // Assert
             var result = response.NetworkInfo.NetworkTip;
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedEpochNumInResponse, result.EpochNumber);
-            Assert.AreEqual(expectedAbsoluteSlotNumInResponse, result.AbsoluteSlotNumber);
-            Assert.AreEqual(expectedSlotNumInResponse, result.SlotNumber);
-            Assert.AreEqual(expectedTimeInResponse, result.Time);
+            Assert.That.AreEqual(expectedTip, result);
         }
 
         [TestMethod]

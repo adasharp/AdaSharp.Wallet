@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AdaSharp.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -6,6 +7,7 @@ namespace AdaSharp.Tests
 {
     public abstract class TestBase
     {
+        // TODO: Move to AssertExtensions
         protected void TestExpectedExceptionIsThrownOn(Action action, Exception expectedExceptionToBeThrown)
         {
             if (action == null)
@@ -54,6 +56,11 @@ namespace AdaSharp.Tests
 
                 Assert.Fail($"An instance of {exType.Name} was thrown.");
             }
+        }
+
+        protected List<T> EmptyListOf<T>()
+        {
+            return new List<T>();
         }
     }
 }

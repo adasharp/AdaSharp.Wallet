@@ -39,5 +39,19 @@ namespace AdaSharp.Model.Shelley.Wallets
         {
             return GetAll(new ListWalletRequest());
         }
+
+        public GetWalletResponse GetWallet(GetWalletRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var responseFromNode = Send(request);
+
+            ValidateOkWasReturned(responseFromNode);
+
+            return new GetWalletResponse(responseFromNode);
+        }
     }
 }

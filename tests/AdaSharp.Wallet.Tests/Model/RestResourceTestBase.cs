@@ -37,6 +37,7 @@ namespace AdaSharp.Tests.Model
                 errorMessageFromNode,
                 HttpStatusCode.NotAcceptable);
 
+            
             TestExpectedExceptionIsThrownOn(requestResourceAction, expectedExceptionToBeThrown);
         }
     }

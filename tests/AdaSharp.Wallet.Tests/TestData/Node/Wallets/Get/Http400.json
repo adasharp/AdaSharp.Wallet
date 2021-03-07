@@ -1,0 +1,4 @@
+﻿{
+  "code": "bad_request",
+  "message": "wallet id should be a hex-encoded string of 40 characters"
+}

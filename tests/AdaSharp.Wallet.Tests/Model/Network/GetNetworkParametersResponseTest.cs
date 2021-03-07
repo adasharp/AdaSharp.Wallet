@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using AdaSharp.Model;
 using AdaSharp.Model.Network;
 using AdaSharp.Tests.Extensions;
 using AdaSharp.Tests.TestData;
@@ -10,7 +9,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Network
 {
     [TestClass]
-    public class GetNetworkParametersResponseTest : TestBase
+    public class GetNetworkParametersResponseTest : CardanoNodeResponseTestBase
     {
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()
@@ -55,7 +54,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_SlotLengthIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(1, "second");
+            var expectedValueInResponse = QuantityInSeconds(1);
             
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
@@ -70,7 +69,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_EpochLengthIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(432000, "slot");
+            var expectedValueInResponse = QuantityInSlots(432000);
 
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
@@ -85,7 +84,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_SecurityParameterIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(2160, "block");
+            var expectedValueInResponse = QuantityInBlocks(2160);
             
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
@@ -100,7 +99,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_ActiveSlotCoefficientIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(5, "percent");
+            var expectedValueInResponse = QuantityInPercent(5);
 
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
@@ -115,7 +114,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_DecentralizationLevelIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(75, "percent");
+            var expectedValueInResponse = QuantityInPercent(75);
 
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
@@ -145,7 +144,7 @@ namespace AdaSharp.Tests.Model.Network
         public void Constructor_NodeReturnsHttp200_MinimumUtxoValueIsPopulated()
         {
             // Assemble
-            var expectedValueInResponse = new UnitOfMeasure(1000000, "lovelace");
+            var expectedValueInResponse = QuantityInLovelace(1000000);
 
             // Act
             var response = ConstructGetNetworkParametersResponse(TestParametersResponse.Http200);
