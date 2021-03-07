@@ -6,7 +6,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Network
 {
     [TestClass]
-    public class GetClockRequestTest : TestBase
+    public class GetClockRequestTest : CardanoNodeRequestTestBase
     {
         [TestMethod]
         public void ToRestRequest_AnyState_ResourceInRequestIsPopulatedWithCorrectUri()

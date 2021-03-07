@@ -6,7 +6,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Shelley.Wallets
 {
     [TestClass]
-    public class GetWalletRequestTest : CardanoNodeRequestTestBase
+    public class DeleteWalletRequestTest : CardanoNodeRequestTestBase
     {
         private const string NominalWalletId = "6b134a8fb58167ad735993bed834c779f06f340f";
 
@@ -16,7 +16,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             // Assemble
             var expectedResourcePath = $"/wallets/{NominalWalletId}";
 
-            var request = new GetWalletRequest
+            var request = new DeleteWalletRequest
             {
                 WalletId = NominalWalletId
             };
@@ -29,10 +29,25 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
+        public void ToRestRequest_AnyState_MethodInRequestIsDelete()
+        {
+            // Assemble
+            const Method expectedRestMethod = Method.DELETE;
+
+            var request = CreateNominalRequest();
+
+            // Act
+            var result = request.ToRestRequest();
+
+            // Assert
+            Assert.AreEqual(expectedRestMethod, result.Method);
+        }
+
+        [TestMethod]
         public void ToRestRequest_WalletIdIsNull_ThrowInvalidRequestException()
         {
             // Assemble
-            var request = new GetWalletRequest
+            var request = new DeleteWalletRequest
             {
                 WalletId = null
             };
@@ -46,24 +61,9 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
                 expectedExceptionToBeThrown);
         }
 
-        [TestMethod]
-        public void ToRestRequest_AnyState_MethodInRequestIsGet()
+        private DeleteWalletRequest CreateNominalRequest()
         {
-            // Assemble
-            const Method expectedRestMethod = Method.GET;
-
-            var request = CreateNominalRequest();
-
-            // Act
-            var result = request.ToRestRequest();
-
-            // Assert
-            Assert.AreEqual(expectedRestMethod, result.Method);
-        }
-
-        private GetWalletRequest CreateNominalRequest()
-        {
-            return new GetWalletRequest
+            return new DeleteWalletRequest
             {
                 WalletId = NominalWalletId
             };

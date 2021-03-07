@@ -10,7 +10,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Shelley.Wallets
 {
     [TestClass]
-    public class ListWalletResponseTest
+    public class ListWalletResponseTest : CardanoNodeResponseTestBase
     {
         [TestMethod]
         public void Constructor_NodeReturnsHttp200_HttpStatusCodeIsOk()

@@ -10,5 +10,7 @@
         ListWalletResponse GetAll();
 
         GetWalletResponse GetWallet(GetWalletRequest request);
+
+        DeleteWalletRequest DeleteWallet(DeleteWalletRequest request);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using RestSharp;
+﻿using RestSharp;
 
 namespace AdaSharp.Model.Shelley.Wallets
 {

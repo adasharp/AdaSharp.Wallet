@@ -12,6 +12,11 @@ namespace AdaSharp.Tests.TestData
             return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.OK);
         }
 
+        public static IRestResponse LoadHttp204From(string bodyContentFilePath)
+        {
+            return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.NoContent);
+        }
+
         public static IRestResponse LoadHttp406From(string bodyContentFilePath)
         {
             return LoadHttpResponseFrom(bodyContentFilePath, HttpStatusCode.NotAcceptable);

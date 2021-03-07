@@ -5,7 +5,7 @@ using RestSharp;
 namespace AdaSharp.Tests.Model.Shelley.Wallets
 {
     [TestClass]
-    public class ListWalletRequestTest : TestBase
+    public class ListWalletRequestTest : CardanoNodeRequestTestBase
     {
         [TestMethod]
         public void ToRestRequest_AnyState_ResourceInRequestIsPopulatedWithCorrectUri()
