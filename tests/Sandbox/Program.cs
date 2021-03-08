@@ -15,7 +15,6 @@ namespace Sandbox
 
             IAdaSharpClient client = new AdaSharpClient(node);
 
-            var response = client.Shelley.Wallets.GetAll();
-        }
+            }
     }
 }

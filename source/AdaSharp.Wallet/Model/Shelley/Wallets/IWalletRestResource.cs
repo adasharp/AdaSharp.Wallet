@@ -11,6 +11,6 @@
 
         GetWalletResponse GetWallet(GetWalletRequest request);
 
-        DeleteWalletRequest DeleteWallet(DeleteWalletRequest request);
+        DeleteWalletResponse DeleteWallet(DeleteWalletRequest request);
     }
 }

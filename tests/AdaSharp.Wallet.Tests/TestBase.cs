@@ -8,11 +8,11 @@ namespace AdaSharp.Tests
     public abstract class TestBase
     {
         // TODO: Move to AssertExtensions
-        protected void TestExpectedExceptionIsThrownOn(Action action, Exception expectedExceptionToBeThrown)
+        protected void TestExpectedExceptionIsThrownOn(Action systemUnderTest, Exception expectedExceptionToBeThrown)
         {
-            if (action == null)
+            if (systemUnderTest == null)
             {
-                throw new ArgumentNullException(nameof(action));
+                throw new ArgumentNullException(nameof(systemUnderTest));
             }
 
             if (expectedExceptionToBeThrown == null)
@@ -25,7 +25,7 @@ namespace AdaSharp.Tests
             try
             {
                 // Act
-                action.Invoke();
+                systemUnderTest.Invoke();
                 exceptionWasNotThrown = true;
             }
             catch (Exception actualEx)

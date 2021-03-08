@@ -61,6 +61,15 @@
     <None Update="TestData\Node\Wallets\Delete\Http204.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\Node\Wallets\Delete\Http400.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Node\Wallets\Delete\Http404.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Node\Wallets\Delete\Http406.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\Node\Wallets\Get\Http404.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -54,9 +54,18 @@ namespace AdaSharp.Model.Shelley.Wallets
             return new GetWalletResponse(responseFromNode);
         }
 
-        public DeleteWalletRequest DeleteWallet(DeleteWalletRequest request)
+        public DeleteWalletResponse DeleteWallet(DeleteWalletRequest request)
         {
-            throw new NotImplementedException();
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var responseFromNode = Send(request);
+
+            ValidateNoContentWasReturned(responseFromNode);
+
+            return new DeleteWalletResponse(responseFromNode);
         }
     }
 }
