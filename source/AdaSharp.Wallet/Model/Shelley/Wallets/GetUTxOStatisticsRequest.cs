@@ -2,7 +2,7 @@
 
 namespace AdaSharp.Model.Shelley.Wallets
 {
-    public class GetWalletRequest : CardanoNodeRequest
+    public class GetUTxOStatisticsRequest : CardanoNodeRequest
     {
         public string WalletId { get; set; }
 
@@ -10,18 +10,15 @@ namespace AdaSharp.Model.Shelley.Wallets
         {
             Validate();
 
-            var resourceUri = $"/wallets/{WalletId}";
+            var resourceUri = $"/wallets/{WalletId}/statistics/utxos";
             var restRequest = new RestRequest(resourceUri, Method.GET);
-            
+
             return restRequest;
         }
 
         internal override void Validate()
         {
-            if (string.IsNullOrWhiteSpace(WalletId))
-            {
-                throw new InvalidRequestException($"A value for the \"{nameof(WalletId)}\" property is required.");
-            }
+            
         }
     }
 }

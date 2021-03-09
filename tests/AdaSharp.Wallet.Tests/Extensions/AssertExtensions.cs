@@ -132,6 +132,33 @@ namespace AdaSharp.Tests.Extensions
             }
         }
 
+        public static void AreEqual(this Assert assert, UTxODistribution expected, UTxODistribution actual)
+        {
+            if (expected != null)
+            {
+                Assert.IsNotNull(actual);
+            }
+            else
+            {
+                Assert.IsNull(actual);
+                return;
+            }
+
+            foreach (var keyValuePair in expected)
+            {
+                var expectedKey = keyValuePair.Key;
+                var expectedValue = keyValuePair.Value;
+
+                var expectedKeyExistsInActual = actual.ContainsKey(expectedKey);
+
+                Assert.IsTrue(expectedKeyExistsInActual, $"Expected key: \"{expectedKey}\".");
+
+                var actualValue = actual[expectedKey];
+
+                Assert.AreEqual(expectedValue, actualValue);
+            }
+        }
+
         private static void AssertArgumentException(ArgumentException expected, ArgumentException actual)
         {
             Assert.AreEqual(expected.ParamName, actual.ParamName);

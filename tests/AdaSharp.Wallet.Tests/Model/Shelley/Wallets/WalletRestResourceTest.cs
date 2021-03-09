@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using AdaSharp.Model;
+﻿using AdaSharp.Model;
 using AdaSharp.Model.Shelley.Wallets;
 using AdaSharp.Tests.TestData.Node.Wallets.Delete;
 using AdaSharp.Tests.TestData.Node.Wallets.Get;

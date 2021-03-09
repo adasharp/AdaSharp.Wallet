@@ -16,7 +16,7 @@ namespace AdaSharp.Model.Shelley.Wallets
             return restRequest;
         }
 
-        protected override void Validate()
+        internal override void Validate()
         {
             if (string.IsNullOrWhiteSpace(WalletId))
             {

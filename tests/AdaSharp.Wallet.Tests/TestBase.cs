@@ -7,6 +7,35 @@ namespace AdaSharp.Tests
 {
     public abstract class TestBase
     {
+        protected void AssertOnExceptionCaught<T>(AssertExceptionDelegate<T> assertDelegate, Action systemUnderTest)
+            where T : Exception
+        {
+            try
+            {
+                systemUnderTest();
+            }
+            catch (Exception ex)
+            {
+                var correctExceptionThrown = ex is T;
+
+                if (correctExceptionThrown == false)
+                {
+                    throw new NotImplementedException();
+                }
+
+                var actualExceptionInExpectedType = (T)ex;
+
+                assertDelegate.Invoke(actualExceptionInExpectedType);
+            }
+        }
+
+        protected void AssertMessageInThrownExceptionIs(string expectedValue, Action systemUnderTest)
+        {
+            AssertOnExceptionCaught<Exception>(
+                actualExThrown => Assert.AreEqual(expectedValue, actualExThrown.Message),
+                systemUnderTest);
+        }
+
         // TODO: Move to AssertExtensions
         protected void TestExpectedExceptionIsThrownOn(Action systemUnderTest, Exception expectedExceptionToBeThrown)
         {

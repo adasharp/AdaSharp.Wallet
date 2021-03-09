@@ -76,17 +76,17 @@ namespace AdaSharp.Tests.Model
 
         protected void TestErrorMessageInExceptionIsNotAcceptableContent(Action systemUnderTest)
         {
-            AssertMessageInExceptionIs(ErrorMessageNotAcceptableContent, systemUnderTest);
+            AssertMessageInThrownExceptionIs(ErrorMessageNotAcceptableContent, systemUnderTest);
         }
 
         protected void TestErrorMessageInExceptionIsNoSuchWallet(Action systemUnderTest)
         {
-            AssertMessageInExceptionIs(ErrorMessageNoSuchWallet, systemUnderTest);
+            AssertMessageInThrownExceptionIs(ErrorMessageNoSuchWallet, systemUnderTest);
         }
 
         protected void TestErrorMessageInExceptionIsMalformedWalletId(Action systemUnderTest)
         {
-            AssertMessageInExceptionIs(ErrorMessageMalformedWalletId, systemUnderTest);
+            AssertMessageInThrownExceptionIs(ErrorMessageMalformedWalletId, systemUnderTest);
         }
 
         protected void TestHttpStatusCodeInExceptionIsNotAcceptable(Action systemUnderTest)
@@ -116,35 +116,6 @@ namespace AdaSharp.Tests.Model
             AssertOnExceptionCaught<CardanoNodeException>(
                 actualExThrown => Assert.AreEqual(expectedValue, actualExThrown.ErrorCode),
                 systemUnderTest);
-        }
-
-        protected void AssertMessageInExceptionIs(string expectedValue, Action systemUnderTest)
-        {
-            AssertOnExceptionCaught<CardanoNodeException>(
-                actualExThrown => Assert.AreEqual(expectedValue, actualExThrown.Message),
-                systemUnderTest);
-        }
-
-        protected void AssertOnExceptionCaught<T>(AssertExceptionDelegate<T> assertDelegate, Action systemUnderTest)
-            where T : Exception
-        {
-            try
-            {
-                systemUnderTest();
-            }
-            catch (Exception ex)
-            {
-                var correctExceptionThrown = ex is T;
-
-                if (correctExceptionThrown == false)
-                {
-                    throw new NotImplementedException();
-                }
-
-                var actualExceptionInExpectedType = (T)ex;
-
-                assertDelegate.Invoke(actualExceptionInExpectedType);
-            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AdaSharp.Model.Shelley.Wallets
             return new RestRequest("/wallets", Method.GET);
         }
 
-        protected override void Validate()
+        internal override void Validate()
         { }
     }
 }

@@ -91,6 +91,9 @@
     <None Update="TestData\Node\Wallets\List\Http406.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\Node\Wallets\Statistics\Utxos\Http200.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\ShelleyWallet-6b134a8.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

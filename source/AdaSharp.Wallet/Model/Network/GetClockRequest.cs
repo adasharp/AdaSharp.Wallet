@@ -20,7 +20,7 @@ namespace AdaSharp.Model.Network
             return restRequest;
         }
 
-        protected override void Validate()
+        internal override void Validate()
         { }
     }
 }

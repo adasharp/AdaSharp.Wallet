@@ -11,7 +11,7 @@ namespace AdaSharp.Model.Network
             return new RestRequest("/network/parameters", Method.GET);
         }
 
-        protected override void Validate()
+        internal override void Validate()
         { }
     }
 }
