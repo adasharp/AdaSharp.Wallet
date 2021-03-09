@@ -13,10 +13,10 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
     public class WalletRestResourceTest : RestResourceTestBase
     {
         private const string NominalWalletId = "6b134a8fb58167ad735993bed834c779f06f340f";
-        private const string NonExistentWalletId = "0000000000000000000000000000000000000000";
-
+        
         // TODO: We verify that an exception is thrown. The message is verified but not 
         // the error code, the error message property and the HTTP status code.
+        // New TODO: Apply this to other test classes.
 
         [TestMethod]
         public void GetAll_NodeReturnsHttp200_ResponseReturnedIsNotNull()
@@ -38,7 +38,37 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             MockNodeToReturn(TestListResponse.Http406);
 
             // Act & Assert
-            AssertNotAcceptableExceptionIsThrownOn(() => GetAllWalletsFromNode());
+            Assert.ThrowsException<CardanoNodeException>(GetAllWalletsFromNode);
+        }
+
+        [TestMethod]
+        public void GetAll_NodeReturnsHttp406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestListResponse.Http406);
+
+            // Act & Assert
+            TestHttpStatusCodeInExceptionIsNotAcceptable(() => GetAllWalletsFromNode());
+        }
+
+        [TestMethod]
+        public void GetAll_NodeReturnsHttp406_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestListResponse.Http406);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => GetAllWalletsFromNode());
+        }
+
+        [TestMethod]
+        public void GetAll_NodeReturnsHttp406_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestListResponse.Http406);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNotAcceptableContent(() => GetAllWalletsFromNode());
         }
 
         [TestMethod]
@@ -55,33 +85,83 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
+        public void GetWallet_NodeReturns400_ThrowException()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http400);
+
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => GetWalletFromNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns400_HttpStatusCodeInExceptionIsBadRequest()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http400);
+
+            // Act
+            TestHttpStatusCodeInExceptionIsBadRequest(() => GetWalletFromNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns400_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http400);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsMalformedWalletId(() => GetWalletFromNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns400_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http400);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsMalformedWalletId(() => GetWalletFromNode(MalformedWalletId));
+        }
+
+        [TestMethod]
         public void GetWallet_NodeReturns404_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http404);
 
-            var expectedExceptionToBeThrown = NoSuchWalletException();
-
             // Act & Assert
-            TestExpectedExceptionIsThrownOn(
-                () => GetWalletFromNode(NominalWalletId),
-                expectedExceptionToBeThrown);
+            Assert.ThrowsException<CardanoNodeException>(() => GetWalletFromNode(NonExistentWalletId));
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns400_ThrowException()
+        public void GetWallet_NodeReturns404_HttpStatusCodeInExceptionIsPopulated()
         {
             // Assemble
-            const string malformedWalletId = "0000";
-
-            MockNodeToReturn(TestGetResponse.Http400);
-
-            var expectedExceptionToBeThrown = WalletIdIsMalformedException();
+            MockNodeToReturn(TestGetResponse.Http404);
 
             // Act & Assert
-            TestExpectedExceptionIsThrownOn(
-                () => GetWalletFromNode(malformedWalletId),
-                expectedExceptionToBeThrown);
+            TestHttpStatusCodeInExceptionIsNotFound(() => GetWalletFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns404_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http404);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNoSuchWallet(() => GetWalletFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns404_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http404);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNoSuchWallet(() => GetWalletFromNode(NonExistentWalletId));
         }
 
         [TestMethod]
@@ -90,12 +170,40 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             // Assemble
             MockNodeToReturn(TestGetResponse.Http406);
 
-            const string anyWalletId = "000";
-
             // Act & Assert
-            AssertNotAcceptableExceptionIsThrownOn(() => GetWalletFromNode(anyWalletId));
+            Assert.ThrowsException<CardanoNodeException>(() => GetWalletFromNode(AnyWalletId));
         }
 
+        [TestMethod]
+        public void GetWallet_NodeReturns406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http406);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => GetWalletFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns406_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http406);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => GetWalletFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturns406_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http406);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNotAcceptableContent(() => GetWalletFromNode(AnyWalletId));
+        }
+        
         [TestMethod]
         public void DeleteWallet_NodeReturns204_ResponseReturnedIsNotNull()
         {
@@ -113,21 +221,40 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         public void DeleteWallet_NodeReturns400_ThrowException()
         {
             // Assemble
-            const string errorCodeFromNode = "bad_request";
-            const string errorMessageFromNode = "wallet id should be a hex-encoded string of 40 characters";
-            const string malformedWalletId = "0000";
-            
             MockNodeToReturn(TestDeleteResponse.Http400);
 
-            var expectedExceptionToBeThrown = new CardanoNodeException(
-                errorCodeFromNode,
-                errorMessageFromNode,
-                HttpStatusCode.NotFound);
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => DeleteWalletOnNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns400_HttpStatusCodeInExceptionIsBadRequest()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http400);
+
+            // Act
+            TestHttpStatusCodeInExceptionIsBadRequest(() => DeleteWalletOnNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns400_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http400);
 
             // Act & Assert
-            TestExpectedExceptionIsThrownOn(
-                () => DeleteWalletOnNode(malformedWalletId),
-                expectedExceptionToBeThrown);
+            TestErrorCodeInExceptionIsMalformedWalletId(() => DeleteWalletOnNode(MalformedWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns400_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http400);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsMalformedWalletId(() => DeleteWalletOnNode(MalformedWalletId));
         }
 
         [TestMethod]
@@ -136,12 +263,38 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http404);
 
-            var expectedExceptionToBeThrown = NoSuchWalletException();
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => DeleteWalletOnNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns404_HttpStatusCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http404);
 
             // Act & Assert
-            TestExpectedExceptionIsThrownOn(
-                () => DeleteWalletOnNode(NonExistentWalletId),
-                expectedExceptionToBeThrown);
+            TestHttpStatusCodeInExceptionIsNotFound(() => DeleteWalletOnNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns404_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http404);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNoSuchWallet(() => DeleteWalletOnNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns404_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http404);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNoSuchWallet(() => DeleteWalletOnNode(NonExistentWalletId));
         }
 
         [TestMethod]
@@ -150,10 +303,38 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http406);
 
-            const string anyWalletId = "000";
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => DeleteWalletOnNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http406);
 
             // Act & Assert
-            AssertNotAcceptableExceptionIsThrownOn(() => DeleteWalletOnNode(anyWalletId));
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => DeleteWalletOnNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns406_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http406);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => DeleteWalletOnNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturns406_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http406);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNotAcceptableContent(() => DeleteWalletOnNode(AnyWalletId));
         }
 
         private GetWalletResponse GetWalletFromNode(string walletId)
@@ -185,31 +366,6 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             var restResource = new WalletRestResource(MockedAdaClient?.Object);
 
             return restResource.DeleteWallet(request);
-        }
-
-        private Exception WalletIdIsMalformedException()
-        {
-            const string errorCodeFromNode = "bad_request";
-            const string errorMessageFromNode = "wallet id should be a hex-encoded string of 40 characters";
-            const HttpStatusCode expectedHttpStatusCodeFromNode = HttpStatusCode.BadRequest;
-
-            return new CardanoNodeException(
-                errorCodeFromNode,
-                errorMessageFromNode,
-                expectedHttpStatusCodeFromNode);
-        }
-
-        private Exception NoSuchWalletException()
-        {
-            const string errorCodeFromNode = "no_such_wallet";
-            var errorMessageFromNode = 
-                "I couldn't find a wallet with the given id: 0000000000000000000000000000000000000000";
-            const HttpStatusCode expectedHttpStatusCodeFromNode = HttpStatusCode.NotFound;
-
-            return new CardanoNodeException(
-                errorCodeFromNode,
-                errorMessageFromNode,
-                expectedHttpStatusCodeFromNode);
         }
     }
 }

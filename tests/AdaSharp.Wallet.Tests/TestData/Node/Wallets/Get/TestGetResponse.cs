@@ -13,9 +13,9 @@ namespace AdaSharp.Tests.TestData.Node.Wallets.Get
             TestRestResponse.LoadHttp404From(@"TestData\Node\Wallets\Get\Http404.json");
 
         public static IRestResponse Http400 =>
-            TestRestResponse.LoadHttp404From(@"TestData\Node\Wallets\Get\Http400.json");
+            TestRestResponse.LoadHttp400From(@"TestData\Node\Wallets\Get\Http400.json");
 
         public static IRestResponse Http406 =>
-            TestRestResponse.LoadHttp404From(@"TestData\Node\Wallets\Get\Http406.json");
+            TestRestResponse.LoadHttp406From(@"TestData\Node\Wallets\Get\Http406.json");
     }
 }
