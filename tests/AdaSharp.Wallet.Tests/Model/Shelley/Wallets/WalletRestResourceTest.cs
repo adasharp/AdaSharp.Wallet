@@ -3,6 +3,7 @@ using AdaSharp.Model.Shelley.Wallets;
 using AdaSharp.Tests.TestData.Node.Wallets.Delete;
 using AdaSharp.Tests.TestData.Node.Wallets.Get;
 using AdaSharp.Tests.TestData.Node.Wallets.List;
+using AdaSharp.Tests.TestData.Node.Wallets.Statistics.Utxos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdaSharp.Tests.Model.Shelley.Wallets
@@ -27,6 +28,16 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetAll_NodeReturnsHttp200_HttpStatusCodeInResponseIsOk()
+        {
+            // Assemble
+            MockNodeToReturn(TestListResponse.Http200);
+
+            // Act
+            TestHttpStatusCodeInResponseIsOk(GetAllWalletsFromNode);
         }
 
         [TestMethod]
@@ -70,7 +81,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns200_ResponseReturnedIsNotNull()
+        public void GetWallet_NodeReturnsHttp200_ResponseReturnedIsNotNull()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http200);
@@ -83,7 +94,17 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns400_ThrowException()
+        public void GetWallet_NodeReturnsHttp200_HttpStatusCodeInResponseIsOk()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http200);
+
+            // Act
+            TestHttpStatusCodeInResponseIsOk(() => GetWalletFromNode(NominalWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturnsHttp400_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http400);
@@ -93,7 +114,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns400_HttpStatusCodeInExceptionIsBadRequest()
+        public void GetWallet_NodeReturnsHttp400_HttpStatusCodeInExceptionIsBadRequest()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http400);
@@ -103,7 +124,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns400_ErrorCodeInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp400_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http400);
@@ -113,7 +134,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns400_MessageInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp400_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http400);
@@ -123,7 +144,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns404_ThrowException()
+        public void GetWallet_NodeReturnsHttp404_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http404);
@@ -133,7 +154,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns404_HttpStatusCodeInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp404_HttpStatusCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http404);
@@ -143,7 +164,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns404_ErrorCodeInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp404_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http404);
@@ -153,7 +174,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns404_MessageInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp404_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http404);
@@ -163,7 +184,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns406_ThrowException()
+        public void GetWallet_NodeReturnsHttp406_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http406);
@@ -173,7 +194,17 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns406_HttpStatusCodeInExceptionIsNotAcceptable()
+        public void GetWallet_NodeReturnsHttp406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestGetResponse.Http406);
+
+            // Act & Assert
+            TestHttpStatusCodeInExceptionIsNotAcceptable(() => GetWalletFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetWallet_NodeReturnsHttp406_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http406);
@@ -183,17 +214,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void GetWallet_NodeReturns406_ErrorCodeInExceptionIsPopulated()
-        {
-            // Assemble
-            MockNodeToReturn(TestGetResponse.Http406);
-
-            // Act & Assert
-            TestErrorCodeInExceptionIsNotAcceptableContent(() => GetWalletFromNode(AnyWalletId));
-        }
-
-        [TestMethod]
-        public void GetWallet_NodeReturns406_MessageInExceptionIsPopulated()
+        public void GetWallet_NodeReturnsHttp406_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestGetResponse.Http406);
@@ -203,7 +224,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
         
         [TestMethod]
-        public void DeleteWallet_NodeReturns204_ResponseReturnedIsNotNull()
+        public void DeleteWallet_NodeReturnsHttp204_ResponseReturnedIsNotNull()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http204);
@@ -216,7 +237,17 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns400_ThrowException()
+        public void DeleteWallet_NodeReturnsHttp204_HttpStatusCodeInResponseIsNoContent()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http204);
+
+            // Act
+            TestHttpStatusCodeInResponseIsNoContent(() => DeleteWalletOnNode(NominalWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturnsHttp400_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http400);
@@ -226,7 +257,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns400_HttpStatusCodeInExceptionIsBadRequest()
+        public void DeleteWallet_NodeReturnsHttp400_HttpStatusCodeInExceptionIsBadRequest()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http400);
@@ -236,7 +267,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns400_ErrorCodeInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp400_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http400);
@@ -246,7 +277,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns400_MessageInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp400_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http400);
@@ -256,7 +287,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns404_ThrowException()
+        public void DeleteWallet_NodeReturnsHttp404_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http404);
@@ -266,7 +297,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns404_HttpStatusCodeInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp404_HttpStatusCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http404);
@@ -276,7 +307,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns404_ErrorCodeInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp404_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http404);
@@ -286,7 +317,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns404_MessageInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp404_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http404);
@@ -296,7 +327,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns406_ThrowException()
+        public void DeleteWallet_NodeReturnsHttp406_ThrowException()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http406);
@@ -306,7 +337,17 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns406_HttpStatusCodeInExceptionIsNotAcceptable()
+        public void DeleteWallet_NodeReturnsHttp406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestDeleteResponse.Http406);
+
+            // Act & Assert
+            TestHttpStatusCodeInExceptionIsNotAcceptable(() => DeleteWalletOnNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void DeleteWallet_NodeReturnsHttp406_ErrorCodeInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http406);
@@ -316,23 +357,116 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         }
 
         [TestMethod]
-        public void DeleteWallet_NodeReturns406_ErrorCodeInExceptionIsPopulated()
-        {
-            // Assemble
-            MockNodeToReturn(TestDeleteResponse.Http406);
-
-            // Act & Assert
-            TestErrorCodeInExceptionIsNotAcceptableContent(() => DeleteWalletOnNode(AnyWalletId));
-        }
-
-        [TestMethod]
-        public void DeleteWallet_NodeReturns406_MessageInExceptionIsPopulated()
+        public void DeleteWallet_NodeReturnsHttp406_MessageInExceptionIsPopulated()
         {
             // Assemble
             MockNodeToReturn(TestDeleteResponse.Http406);
 
             // Act & Assert
             TestErrorMessageInExceptionIsNotAcceptableContent(() => DeleteWalletOnNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp200_ResponseReturnedIsNotNull()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http200);
+
+            // Act
+            var result = GetUTxOStatisticsFromNode(NominalWalletId);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp200_HttpStatusCodeInResponseIsOk()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http200);
+
+            // Act & Assert
+            TestHttpStatusCodeInResponseIsOk(() => GetUTxOStatisticsFromNode(NominalWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp404_ThrowException()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http404);
+
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => GetUTxOStatisticsFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp404_HttpStatusCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http404);
+
+            // Act & Assert
+            TestHttpStatusCodeInExceptionIsNotFound(() => GetUTxOStatisticsFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp404_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http404);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNoSuchWallet(() => GetUTxOStatisticsFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp404_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http404);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNoSuchWallet(() => GetUTxOStatisticsFromNode(NonExistentWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp406_ThrowException()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http406);
+
+            // Act & Assert
+            Assert.ThrowsException<CardanoNodeException>(() => GetUTxOStatisticsFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp406_HttpStatusCodeInExceptionIsNotAcceptable()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http406);
+
+            // Act & Assert
+            TestHttpStatusCodeInExceptionIsNotAcceptable(() => GetUTxOStatisticsFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp406_ErrorCodeInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http406);
+
+            // Act & Assert
+            TestErrorCodeInExceptionIsNotAcceptableContent(() => GetUTxOStatisticsFromNode(AnyWalletId));
+        }
+
+        [TestMethod]
+        public void GetUTxOStatistics_NodeReturnsHttp406_MessageInExceptionIsPopulated()
+        {
+            // Assemble
+            MockNodeToReturn(TestUtxosResponse.Http406);
+
+            // Act & Assert
+            TestErrorMessageInExceptionIsNotAcceptableContent(() => GetUTxOStatisticsFromNode(AnyWalletId));
         }
 
         private GetWalletResponse GetWalletFromNode(string walletId)
@@ -364,6 +498,18 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
             var restResource = new WalletRestResource(MockedAdaClient?.Object);
 
             return restResource.DeleteWallet(request);
+        }
+
+        private GetUTxOStatisticsResponse GetUTxOStatisticsFromNode(string walletId)
+        {
+            var request = new GetUTxOStatisticsRequest
+            {
+                WalletId = walletId
+            };
+
+            var restResource = new WalletRestResource(MockedAdaClient?.Object);
+
+            return restResource.GetUTxOStatistics(request);
         }
     }
 }

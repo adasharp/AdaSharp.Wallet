@@ -12,5 +12,7 @@
         GetWalletResponse GetWallet(GetWalletRequest request);
 
         DeleteWalletResponse DeleteWallet(DeleteWalletRequest request);
+
+        GetUTxOStatisticsResponse GetUTxOStatistics(GetUTxOStatisticsRequest request);
     }
 }

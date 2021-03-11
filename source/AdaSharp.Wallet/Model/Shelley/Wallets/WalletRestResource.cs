@@ -67,5 +67,19 @@ namespace AdaSharp.Model.Shelley.Wallets
 
             return new DeleteWalletResponse(responseFromNode);
         }
+
+        public GetUTxOStatisticsResponse GetUTxOStatistics(GetUTxOStatisticsRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var responseFromNode = Send(request);
+
+            ValidateOkWasReturned(responseFromNode);
+
+            return new GetUTxOStatisticsResponse(responseFromNode);
+        }
     }
 }

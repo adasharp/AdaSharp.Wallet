@@ -104,6 +104,24 @@ namespace AdaSharp.Tests.Model
             AssertHttpStatusCodeInExceptionIs(HttpStatusCode.BadRequest, systemUnderTest);
         }
 
+        protected void TestHttpStatusCodeInResponseIsNoContent(Func<CardanoNodeResponse> systemUnderTest)
+        {
+            AssertHttpStatusCodeInResponseIs(HttpStatusCode.NoContent, systemUnderTest);
+        }
+
+        protected void TestHttpStatusCodeInResponseIsOk(Func<CardanoNodeResponse> systemUnderTest)
+        {
+            AssertHttpStatusCodeInResponseIs(HttpStatusCode.OK, systemUnderTest);
+        }
+
+        protected void AssertHttpStatusCodeInResponseIs(HttpStatusCode expectedValue,
+            Func<CardanoNodeResponse> systemUnderTest)
+        {
+            var responseFromNode = systemUnderTest.Invoke();
+
+            Assert.AreEqual(expectedValue, responseFromNode.HttpStatusCode);
+        }
+
         protected void AssertHttpStatusCodeInExceptionIs(HttpStatusCode expectedValue, Action systemUnderTest)
         {
             AssertOnExceptionCaught<CardanoNodeException>(

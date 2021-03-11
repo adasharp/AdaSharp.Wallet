@@ -26,7 +26,12 @@ namespace AdaSharp.Tests
                 var actualExceptionInExpectedType = (T)ex;
 
                 assertDelegate.Invoke(actualExceptionInExpectedType);
+                return;
             }
+
+            var expectedExceptionTypeName = typeof(T).Name;
+
+            Assert.Fail($"The expected exception \"{expectedExceptionTypeName}\" was not thrown.");
         }
 
         protected void AssertMessageInThrownExceptionIs(string expectedValue, Action systemUnderTest)
