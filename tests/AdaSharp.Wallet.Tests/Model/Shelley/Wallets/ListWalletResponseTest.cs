@@ -60,7 +60,7 @@ namespace AdaSharp.Tests.Model.Shelley.Wallets
         public void Constructor_NodeReturnsListOfWallets_WalletPropertiesArePopulated()
         {
             // Assemble
-            var expectedWallet = TestWallet.NominalWallet;
+            var expectedWallet = TestShelleyWallet.NominalWallet;
 
             // Act
             var response = ConstructListWalletResponseFrom(TestListResponse.Http200);

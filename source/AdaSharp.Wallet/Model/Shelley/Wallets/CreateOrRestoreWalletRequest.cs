@@ -2,7 +2,7 @@
 
 namespace AdaSharp.Model.Shelley.Wallets
 {
-    public abstract class CreateWalletRequest : CardanoNodeRequest
+    public abstract class CreateOrRestoreWalletRequest : CardanoNodeRequest
     {
         public const int DefaultAddressPoolGap = 20;
 

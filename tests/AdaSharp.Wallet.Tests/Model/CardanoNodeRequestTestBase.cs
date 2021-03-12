@@ -1,4 +1,5 @@
-﻿using AdaSharp.Model;
+﻿using System;
+using AdaSharp.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdaSharp.Tests.Model
@@ -13,6 +14,14 @@ namespace AdaSharp.Tests.Model
 
             // Assert
             Assert.AreEqual(expectedValue, result.Resource);
+        }
+
+        // TODO: Apply this to all test classes.
+        protected void TestInvalidRequestExceptionIsThrownOn(Action systemUnderTest, string expectedExceptionMessage)
+        {
+            var expectedException = new InvalidRequestException(expectedExceptionMessage);
+
+            TestExpectedExceptionIsThrownOn(systemUnderTest, expectedException);
         }
     }
 }

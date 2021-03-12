@@ -8,7 +8,7 @@ namespace AdaSharp.Model.Shelley.Wallets
             : base(client)
         { }
 
-        public CreateWalletResponse CreateWallet(CreateWalletRequest request)
+        public CreateOrRestoreWalletResponse CreateWallet(CreateOrRestoreWalletRequest request)
         {
             if (request == null)
             {
@@ -18,7 +18,7 @@ namespace AdaSharp.Model.Shelley.Wallets
             var responseFromNode = Send(request);
 
             // TODO: validate
-            return new CreateWalletResponse(responseFromNode);
+            return new CreateOrRestoreWalletResponse(responseFromNode);
         }
 
         public ListWalletResponse GetAll(ListWalletRequest request)

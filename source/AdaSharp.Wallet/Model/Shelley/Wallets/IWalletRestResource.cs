@@ -3,7 +3,7 @@
     public interface IWalletRestResource
     {
         // TODO: Create Or Restore
-        CreateWalletResponse CreateWallet(CreateWalletRequest request);
+        CreateOrRestoreWalletResponse CreateWallet(CreateOrRestoreWalletRequest request);
 
         ListWalletResponse GetAll(ListWalletRequest request);
 
